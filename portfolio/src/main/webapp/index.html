@@ -2,17 +2,45 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <title>Chen Xie</title>
+    <meta name="description" content="Chen Xie's personal website">
+    <meta name="author" content="Chen Xie">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js"></script>
   </head>
+  
   <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+    <div class="topwrap">
+    <div class="topmid">
+      <ul class="topnav" id="myTopnav">
+        <li class="active"><a>Home</a></li>
+        <li><a href="/project.html">Project</a></li>
+        <li><a href="/life.html">Life</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li class="icon">
+          <a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
+        </li>
+      </ul>
+    </div>
+  
+    <div id="title">
+      <h1>Hi!! I'm Chen Xie.</h1>
+    </div>
+
+    <div class="intro">
+        <p>
+          I'm senior majoring in CS at UMass Amherst. 
+          Previously, I interned at Facebook Story team in summer 2019.
+        </p>
+    </div>
+    
+    <div class = "selfie">
+        <p>Me at work :)</p>
+        <a href="images/selfie.jpg">
+            <img src="images/selfie.jpg"/></a>
+    <div>
     </div>
   </body>
 </html>

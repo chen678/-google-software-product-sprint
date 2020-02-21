@@ -1,0 +1,11 @@
+.selfie {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.selfie img {
+  margin: 10px;
+  max-height: 200px;
+  max-width: 200px;
+  transform: rotate(-90deg);
+}
