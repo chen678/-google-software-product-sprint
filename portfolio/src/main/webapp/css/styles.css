@@ -1,0 +1,6 @@
+#selfie {
+    display: flex;
+    flex-wrap: wrap;
+    width: 140px;
+    transform: rotate(-90);
+}
