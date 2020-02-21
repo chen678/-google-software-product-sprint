@@ -1,7 +1,8 @@
 #selfie {
-    display: flex;
+    display: block;
     flex-wrap: wrap;
-    width: 140px;
+    margin-left: auto;
+    margin-right: auto;
     transform: rotate(-90);
 }
 
