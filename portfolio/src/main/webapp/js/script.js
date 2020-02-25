@@ -23,3 +23,11 @@ function responsiveTopNav() {
         x.className = "topnav";
     }
 }
+
+function myFetch(){
+    console.log("myFetch() called");
+  fetch('/data').then(response => response.text()).then((quote) => {
+    document.getElementById('fetch-result').innerText = quote;
+  });
+
+}
