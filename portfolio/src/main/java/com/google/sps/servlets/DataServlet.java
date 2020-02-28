@@ -14,6 +14,7 @@
 
 package com.google.sps.servlets;
 
+import com.google.sps.data.CommentList;
 import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -26,28 +27,28 @@ import java.util.*;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    
-    String json = convertToJson(generateJsonAsArrayList());
+    private final CommentList mCommentList = new CommentList();
 
-    response.setContentType("text/html;");
-    response.getWriter().println(json);
-  }
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        String json = new Gson().toJson(mCommentList);
+        response.getWriter().println(json);
+    }
 
-  private ArrayList<String> generateJsonAsArrayList(){
-    ArrayList<String> msg = new ArrayList<String>(); 
-    msg.add("hello");
-    msg.add("world");
-    msg.add("Chen");
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // Get the input from the form.
+        String comment =  request.getParameter("user-comment");
+        if (comment.length() == 0) {
+            response.setContentType("text/html");
+            response.getWriter().println("Your comment is empty!");
+            return;
+        }
 
-    return msg;
-  }
+        mCommentList.addCommentEntry(comment);
 
-  private String convertToJson(ArrayList arraylist) {
-    Gson gson = new Gson();
-    String json = gson.toJson(arraylist);
-    return json;
-  }
-
+        // Redirect back to the comments section.
+        response.sendRedirect("/index.html#comments");
+    }
 }

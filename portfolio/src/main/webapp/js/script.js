@@ -24,10 +24,24 @@ function responsiveTopNav() {
     }
 }
 
-function fetchJson(){
-    fetch('/data').then(response => response.text()).then((array) => {
-        console.log(array);
-        document.getElementById('fetch-result').innerText = array;
+/** Fetches the list of all user comments and builds the UI. */
+function getComments(){
+    fetch('/data').then(response => response.json()).then((commentsEntries) => {
+        // Build the list of history comments.
+        const historyOfComments = document.getElementById('history');
+        if(commentsEntries.history.length == 0){
+            historyOfComments.appendChild(createListElement("OH! Be the first one to leave a message!"));
+        } else{
+            commentsEntries.history.forEach((line) => {
+                historyOfComments.appendChild(createListElement(line));
+            });
+        }
     });
+}
 
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }
