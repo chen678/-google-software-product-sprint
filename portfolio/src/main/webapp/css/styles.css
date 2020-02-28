@@ -1,0 +1,44 @@
+#selfie {
+    display: block;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+    transform: rotate(-90);
+}
+
+div.topwrap {
+    text-align: center;
+    background-color: rgba(0,0,0,0);
+}
+div.topmid {
+    margin: 0 auto; 
+    width: 60%;
+}
+ul.topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Float the list items side by side */
+ul.topnav li {float: left;}
+
+/* Style the links inside the list items */
+ul.topnav li a {
+    display: inline-block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+    text-shadow: -2px 0 black, 0 1px black, 1px 0 black, 0 -2px black;
+}
+
+ul.topnav li a:hover {background-color: rgb(150,150,150);}
+
+ul.topnav li.active {background-color: rgb(50,50,50);}
+
+/* Hide the list item that contains the link that should open and close the topnav on small screens */
+ul.topnav li.icon {display: none;}
