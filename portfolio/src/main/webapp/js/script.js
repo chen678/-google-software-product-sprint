@@ -24,7 +24,7 @@ function responsiveTopNav() {
     }
 }
 
-function myFetch(){
+function fetchJson(){
     fetch('/data').then(response => response.text()).then((array) => {
         console.log(array);
         document.getElementById('fetch-result').innerText = array;

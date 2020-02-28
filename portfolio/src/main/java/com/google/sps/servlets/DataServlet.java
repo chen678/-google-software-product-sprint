@@ -29,13 +29,13 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
-    String json = convertToJson(createArrayList());
+    String json = convertToJson(generateJsonAsArrayList());
 
     response.setContentType("text/html;");
     response.getWriter().println(json);
   }
 
-  private ArrayList<String> createArrayList(){
+  private ArrayList<String> generateJsonAsArrayList(){
     ArrayList<String> msg = new ArrayList<String>(); 
     msg.add("hello");
     msg.add("world");
