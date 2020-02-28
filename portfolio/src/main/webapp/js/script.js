@@ -25,9 +25,9 @@ function responsiveTopNav() {
 }
 
 function myFetch(){
-    console.log("myFetch() called");
-  fetch('/data').then(response => response.text()).then((quote) => {
-    document.getElementById('fetch-result').innerText = quote;
-  });
+    fetch('/data').then(response => response.text()).then((array) => {
+        console.log(array);
+        document.getElementById('fetch-result').innerText = array;
+    });
 
 }
