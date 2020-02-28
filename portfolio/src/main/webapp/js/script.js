@@ -26,17 +26,34 @@ function responsiveTopNav() {
 
 /** Fetches the list of all user comments and builds the UI. */
 function getComments(){
-    fetch('/data').then(response => response.json()).then((commentsEntries) => {
+    fetch('/list-comments').then(response => response.json()).then((comments) => {
         // Build the list of history comments.
         const historyOfComments = document.getElementById('history');
-        if(commentsEntries.history.length == 0){
+        console.log(comments);
+        if(comments.length == 0){
             historyOfComments.appendChild(createListElement("OH! Be the first one to leave a message!"));
         } else{
-            commentsEntries.history.forEach((line) => {
-                historyOfComments.appendChild(createListElement(line));
+            comments.forEach((entry) => {
+                console.log(entry);
+                historyOfComments.appendChild(createCommentElement(entry));
             });
         }
     });
+}
+
+/** Creates an element that represents a comment that include the context and time. */
+function createCommentElement(entry) {
+  const commentElement = document.createElement('li');
+  commentElement.className = 'comment';
+
+  const contextElement = document.createElement('li');
+  const dateElement = document.createElement('li');
+  contextElement.innerText = entry.context;
+  dateElement.innerText = entry.date;
+
+  commentElement.appendChild(contextElement);
+  commentElement.appendChild(dateElement);
+  return commentElement;
 }
 
 /** Creates an <li> element containing text. */
