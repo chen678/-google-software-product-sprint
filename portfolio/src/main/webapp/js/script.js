@@ -29,12 +29,10 @@ function getComments(){
     fetch('/list-comments').then(response => response.json()).then((comments) => {
         // Build the list of history comments.
         const historyOfComments = document.getElementById('history');
-        console.log(comments);
         if(comments.length == 0){
             historyOfComments.appendChild(createListElement("OH! Be the first one to leave a message!"));
         } else{
             comments.forEach((entry) => {
-                console.log(entry);
                 historyOfComments.appendChild(createCommentElement(entry));
             });
         }

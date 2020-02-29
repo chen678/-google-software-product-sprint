@@ -2,7 +2,7 @@ package com.google.sps.data;
 
 import java.util.Date;
 
-/** A comment entry. */
+/** A comment entry that contains the context, time it was left, and id in the datastore. */
 public final class Comment {
 
   private final long id;
