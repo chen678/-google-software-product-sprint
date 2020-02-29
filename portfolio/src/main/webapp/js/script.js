@@ -48,11 +48,14 @@ function createCommentElement(entry) {
 
   const contextElement = document.createElement('li');
   const dateElement = document.createElement('li');
+  const br = document.createElement("br");
+  
   contextElement.innerText = entry.context;
   dateElement.innerText = entry.date;
 
   commentElement.appendChild(contextElement);
   commentElement.appendChild(dateElement);
+  commentElement.appendChild(br);
   return commentElement;
 }
 
