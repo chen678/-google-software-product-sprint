@@ -11,44 +11,41 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 package com.google.sps.servlets;
 
-import com.google.sps.data.CommentList;
-import com.google.gson.Gson;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import java.io.IOException;
+import java.util.Date;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
-public class DataServlet extends HttpServlet {
-
-    private final CommentList mCommentList = new CommentList();
-
-    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("application/json");
-        String json = new Gson().toJson(mCommentList);
-        response.getWriter().println(json);
-    }
+/** Servlet responsible for creating new comment entry. */
+@WebServlet("/new-entry")
+public class NewCommentServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Get the input from the form.
-        String comment =  request.getParameter("user-comment");
-        if (comment.length() == 0) {
+        String context = request.getParameter("user-comment");
+        if (context.length() == 0) {
             response.setContentType("text/html");
             response.getWriter().println("Your comment is empty!");
             return;
         }
 
-        mCommentList.addCommentEntry(comment);
+        Date date = new Date();
 
-        // Redirect back to the comments section.
+        Entity commentEntity = new Entity("Comment");
+        commentEntity.setProperty("context", context);
+        commentEntity.setProperty("date", date);
+
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        datastore.put(commentEntity);
+
         response.sendRedirect("/index.html#comments");
     }
 }

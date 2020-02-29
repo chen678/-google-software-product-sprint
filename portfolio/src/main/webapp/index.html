@@ -11,7 +11,7 @@
     <script src="js/script.js"></script>
   </head>
   
-  <body onload = "fetchJson()">
+  <body onload = "getComments()">
     <div class="topwrap">
         
         <div class="topmid">
@@ -19,6 +19,7 @@
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="#project">Project</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#comments">Comments</a></li>
                 <li class="icon">
                     <a href="javascript:void(0);" onclick="responsiveTopNav()"></a>
                 </li>
@@ -50,7 +51,7 @@
             </h1>
             <p>
                 Some of the projects I have worked on: <br />
-                Android app: story sticker; orchardwatch (app for local apple farm) <br />
+                Android app: story creation page in Facebook story; orchardwatch (app for local apple farm) <br />
                 <br />
                 and more... in  <a href="https://github.com/chen678">Github</a>
             </p>
@@ -74,11 +75,19 @@
             </p>
         </a>
 
+        <a id ="comments">
+            <h1>Comments</h1>
+            
+            <p>See what people said: </br>
+                <ul id="history"></ul>
+            </p>
 
-        <h1>Week 2 test</h1>
-        <p>Here is the json fetch result from /data: </br>
-            <div id="fetch-result"></div>
-        </p>
+            <form action="/new-entry" method="POST">
+                <p>Leave your messages & comments here:</p>
+                <input type="text" name="user-comment"  maxlength="200"> <br/><br/>
+                <input type="submit" />
+            </form>
+        </a>
 
     <!-- this below is the end tag of topwrap to center the entire website -->
     </div>

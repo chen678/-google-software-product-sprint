@@ -42,3 +42,10 @@ ul.topnav li.active {background-color: rgb(50,50,50);}
 
 /* Hide the list item that contains the link that should open and close the topnav on small screens */
 ul.topnav li.icon {display: none;}
+
+#history {
+    list-style-type: none;
+    margin: 15;
+    padding: 0;
+    overflow: hidden;
+}

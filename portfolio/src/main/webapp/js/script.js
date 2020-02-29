@@ -24,10 +24,42 @@ function responsiveTopNav() {
     }
 }
 
-function fetchJson(){
-    fetch('/data').then(response => response.text()).then((array) => {
-        console.log(array);
-        document.getElementById('fetch-result').innerText = array;
+/** Fetches the list of all user comments and builds the UI. */
+function getComments(){
+    fetch('/list-comments').then(response => response.json()).then((comments) => {
+        // Build the list of history comments.
+        const historyOfComments = document.getElementById('history');
+        if(comments.length == 0){
+            historyOfComments.appendChild(createListElement("OH! Be the first one to leave a message!"));
+        } else{
+            comments.forEach((entry) => {
+                historyOfComments.appendChild(createCommentElement(entry));
+            });
+        }
     });
+}
 
+/** Creates an element that represents a comment that include the context and time. */
+function createCommentElement(entry) {
+  const commentElement = document.createElement('li');
+  commentElement.className = 'comment';
+
+  const contextElement = document.createElement('li');
+  const dateElement = document.createElement('li');
+  const br = document.createElement("br");
+  
+  contextElement.innerText = entry.context;
+  dateElement.innerText = entry.date;
+
+  commentElement.appendChild(contextElement);
+  commentElement.appendChild(dateElement);
+  commentElement.appendChild(br);
+  return commentElement;
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }
