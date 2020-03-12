@@ -80,6 +80,13 @@
             
             <p>See what people said: </br>
                 <ul id="history"></ul>
+                    <select id="language">
+                        <option value="es">English</option>
+                        <option value="zh">Chinese</option>
+                        <option value="es">Spanish</option>
+                    </select>
+
+                    <button onclick="requestTranslation();">Translate</button>
             </p>
 
             <form action="/new-entry" method="POST">

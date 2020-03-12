@@ -39,6 +39,31 @@ function getComments(){
     });
 }
 
+function requestTranslation(){
+    const languageCode = document.getElementById('language').value;
+    const params = new URLSearchParams();
+    params.append('languageCode', languageCode);
+
+    /* remove all comments in current language */
+    const historyOfComments = document.getElementById('history');
+    while (historyOfComments.firstChild) {
+        historyOfComments.removeChild(historyOfComments.firstChild);
+    }
+
+    fetch('/translate-comments', {
+          method: 'POST',
+          body: params
+        }).then(response => response.json()).then((comments) => {
+        // Build the list of history comments.
+        const historyOfComments = document.getElementById('history');
+        if(comments.length != 0){
+            comments.forEach((entry) => {
+                historyOfComments.appendChild(createCommentElement(entry));
+            });
+        }
+    });
+}
+
 /** Creates an element that represents a comment that include the context and time. */
 function createCommentElement(entry) {
   const commentElement = document.createElement('li');
