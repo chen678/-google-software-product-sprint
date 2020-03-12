@@ -41,12 +41,7 @@ import java.util.Enumeration;
 public class TranslationServlet extends HttpServlet {
 
     private static String DEFAULT_LANGUAGE_CODE = "es";
-    private String mLanguageCode = DEFAULT_LANGUAGE_CODE;
     Translate translate = TranslateOptions.getDefaultInstance().getService();
-
-    private boolean needTranslation(String targetLanguageCode){
-        return (targetLanguageCode.compareTo("original")) != 0;
-    }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException { 
@@ -61,7 +56,6 @@ public class TranslationServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().println(gson.toJson(getCommentList(languageCode)));
-
     }
 
     private List<Comment> getCommentList(String languageCode){
@@ -73,15 +67,16 @@ public class TranslationServlet extends HttpServlet {
         List<Comment> comments = new ArrayList<>();
         for (Entity entity : results.asIterable()) {
             long id = entity.getKey().getId();
-            String targetText = (String) entity.getProperty("context");
+            String originalText = (String) entity.getProperty("context");
             Date date = (Date) entity.getProperty("date");
- 
-            // Translation translation =
-            //     translate.translate(targetText, Translate.TranslateOption.targetLanguage(languageCode));
-                //  targetText = translation.getTranslatedText();
-                targetText = "test.";
-  
-            Comment comment = new Comment(id, targetText, date);
+
+            // Do the translation.
+            Translate translate = TranslateOptions.getDefaultInstance().getService();
+            Translation translation =
+                translate.translate(originalText, Translate.TranslateOption.targetLanguage(languageCode));
+            String translatedText = translation.getTranslatedText();
+
+            Comment comment = new Comment(id, translatedText, date);
             comments.add(comment);
         }
         return comments;
